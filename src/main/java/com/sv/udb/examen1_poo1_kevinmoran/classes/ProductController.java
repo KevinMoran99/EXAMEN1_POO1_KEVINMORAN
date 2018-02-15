@@ -22,12 +22,21 @@ public class ProductController {
     ArrayList<Product> productList;
 
     /**
-     * 
+     * Constructor, inicializa la lista de productos
      */
     public ProductController() {
         productList = new ArrayList<>();
     }
     
+    /**
+     * Añade un nuevo producto a la lista
+     * @param name Nombre del producto
+     * @param price Precio del producto
+     * @param stock Existencia del producto
+     * @param min Minimo permitido de la existencia
+     * @param expires Fecha de caducidad
+     * @return true si la operacion es exitosa, false si no
+     */
     public boolean addProduct (String name, double price, int stock, int min, Date expires) {
         try {
             productList.add(new Product(name, price, stock, min, expires));
@@ -39,6 +48,10 @@ public class ProductController {
         }
     }
     
+    /**
+     * 
+     * @return El top 3 de productos más caros
+     */
     public DefaultListModel getExpensiveProducts () {
         DefaultListModel model = new DefaultListModel ();
         //Arreglom que contiene el top 3, con productos vacios
@@ -74,11 +87,22 @@ public class ProductController {
         return model;
     }
     
+    /**
+     * Copiado de inter xd Resta de fechas
+     * @param date1 Fecha mayor
+     * @param date2 Fecha menor
+     * @param timeUnit Unidad de tiempo a devolver
+     * @return La cantidad de unidades de tiempo especificadas que resultan de la resta
+     */
     private static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
     
+    /**
+     * 
+     * @return El nombre del producto más próximo a expirar
+     */
     public String getExpiredProduct () {
         
         String productName = "ninguno";
@@ -98,6 +122,10 @@ public class ProductController {
         return productName;
     }
     
+    /**
+     * 
+     * @return La lista de todos los productos que llegaron a su limite
+     */
     public DefaultListModel getMinedProducts () {
         DefaultListModel model = new DefaultListModel ();
         
