@@ -8,6 +8,7 @@ package com.sv.udb.examen1_poo1_kevinmoran.classes;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 /**
@@ -136,4 +137,23 @@ public class ProductController {
         return model;
     }
     
+    
+    public DefaultComboBoxModel getAllProducts () {
+        DefaultComboBoxModel model = new DefaultComboBoxModel ();
+        
+        for (Product product : productList) 
+            model.addElement(product);
+        
+        return model;
+    }
+    
+    public static boolean checkStock(Product product, int quantity) {
+        try {
+            return quantity <= (product.getStock() - product.getMin());
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

@@ -5,10 +5,13 @@
  */
 package com.sv.udb.examen1_poo1_kevinmoran.forms;
 
+import com.sv.udb.examen1_poo1_kevinmoran.classes.BillController;
+import com.sv.udb.examen1_poo1_kevinmoran.classes.Product;
 import com.sv.udb.examen1_poo1_kevinmoran.classes.ProductController;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.text.SimpleDateFormat;
 public class MainFrame extends javax.swing.JFrame {
 
     private ProductController pController;
+    private BillController bController;
     
     /**
      * Creates new form MainFrame
@@ -25,6 +29,16 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         pController = new ProductController();
+        bController = new BillController();
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Producto");
+        model.addColumn("Precio unitario");
+        model.addColumn("Cantidad");
+        model.addColumn("Subtotal");
+        
+        tblBill.setModel(model);
     }
 
     /**
@@ -58,6 +72,15 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblExpiredProduct = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        cmbProduct = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblBill = new javax.swing.JTable();
+        btnAddBill = new javax.swing.JButton();
+        txtQuantity = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,6 +244,83 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Ver estadísticas", jPanel2);
 
+        cmbProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vacío" }));
+
+        tblBill.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblBill);
+
+        btnAddBill.setText("Agregar a factura");
+        btnAddBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddBillActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Cantidad");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel10.setText("TOTAL:");
+
+        lblTotal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblTotal.setText("$0.00");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addGap(30, 30, 30)
+                        .addComponent(lblTotal))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAddBill)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(cmbProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAddBill)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotal)
+                    .addComponent(jLabel10))
+                .addContainerGap(64, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Generar facturas", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -263,6 +363,23 @@ public class MainFrame extends javax.swing.JFrame {
         lstMin.setModel(pController.getMinedProducts());
         lstExp.setModel(pController.getExpensiveProducts());
         lblExpiredProduct.setText(pController.getExpiredProduct());
+        
+        cmbProduct.setModel(pController.getAllProducts());
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Producto");
+        model.addColumn("Precio unitario");
+        model.addColumn("Cantidad");
+        model.addColumn("Subtotal");
+        
+        tblBill.setModel(model);
+        
+    }
+    
+    private void refreshBillTable() {
+        tblBill.setModel(bController.getBill());
+        lblTotal.setText(bController.getTotal());
     }
     
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
@@ -293,6 +410,31 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese todos los datos con formatos correctos.");
         }
     }//GEN-LAST:event_btnAddProductActionPerformed
+
+    private void btnAddBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBillActionPerformed
+        try {
+            Product product = (Product) cmbProduct.getSelectedItem();
+            int quantity = Integer.parseInt(txtQuantity.getText().trim());
+            
+            if (quantity <= 0 || cmbProduct.getSelectedIndex() == -1)
+                throw new Exception();
+            
+            String response = "";
+            if(bController.addItem(product, quantity)) {
+                response = "Producto añadido.";
+                cmbProduct.removeItem(product);
+                refreshBillTable();
+            }
+            else {
+                response = "La cantidad seleccionada sobrepasa la existencia del producto.";
+            }
+            JOptionPane.showMessageDialog(this, response);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un producto y una cantidad entera positiva.");
+        }
+    }//GEN-LAST:event_btnAddBillActionPerformed
 
     /**
      * @param args the command line arguments
@@ -330,8 +472,11 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBill;
     private javax.swing.JButton btnAddProduct;
+    private javax.swing.JComboBox<String> cmbProduct;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -339,18 +484,24 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblExpiredProduct;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JList<String> lstExp;
     private javax.swing.JList<String> lstMin;
+    private javax.swing.JTable tblBill;
     private javax.swing.JTextField txtExpires;
     private javax.swing.JTextField txtMin;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQuantity;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
 }
